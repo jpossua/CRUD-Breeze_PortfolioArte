@@ -11,6 +11,11 @@
     Estilos:
     - CSS personalizado en <style> para animaciones y glassmorphism.
     - Uso de Google Fonts (Space Grotesk).
+    
+    Nota Técnica:
+    A diferencia de las otras vistas, esta NO extiende de 'layouts.bootstrap'
+    porque tiene un diseño único de pantalla completa con animaciones de fondo
+    que no necesita la barra de navegación estándar. Define su propio HTML <html>.
 --}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -21,16 +26,21 @@
     <link rel="icon" href="https://iesplayamar.es/wp-content/uploads/2021/09/logo-ies-playamar.png" type="image/png">
     <title>Mi Portafolio de Arte | Bienvenida</title>
 
-    <!-- Bootstrap 5 CDN -->
+    <!-- Cargamos Bootstrap 5 desde CDN (Internet) para no necesitar archivos locales -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Fonts -->
+    <!-- Fuentes de Google: Space Grotesk (Moderna) y Material Symbols (Iconos) -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
 
     <style>
+        /*
+           VARIABLES CSS (:root)
+           Definimos los colores principales aquí para usarlos en todo el archivo.
+           Si queremos cambiar el color azul principal, solo lo cambiamos en --primary-color.
+        */
         :root {
             --primary-color: #4b2bee;
             --primary-hover: #3a21b8;
@@ -49,7 +59,10 @@
             flex-direction: column;
         }
 
-        /* --- Custom Utilities to match Tailwind Look --- */
+        /*
+           CLASES DE UTILIDAD PERSONALIZADAS
+           Creamos clases parecidas a Tailwind pero con CSS puro.
+        */
         .text-primary-custom {
             color: var(--primary-color);
         }
@@ -62,23 +75,19 @@
             color: #009688;
         }
 
-        /* Matching Tailwind teal-500 approx */
         .text-purple {
             color: #9333ea;
         }
 
-        /* Matching Tailwind purple-600 */
         .text-pink {
             color: #ec4899;
         }
-
-        /* Matching Tailwind pink-500 */
 
         .font-mono {
             font-family: 'Courier New', Courier, monospace;
         }
 
-        /* Gradients */
+        /* Texto con gradiente (degradado de color) */
         .text-gradient {
             background: linear-gradient(to right, var(--primary-color), #a855f7);
             -webkit-background-clip: text;
@@ -86,7 +95,7 @@
             color: transparent;
         }
 
-        /* --- Background Animation --- */
+        /* --- Animación de Fondo (Blobs) --- */
         .blob-bg {
             position: fixed;
             top: 0;
@@ -94,25 +103,12 @@
             width: 100%;
             height: 100%;
             z-index: -1;
+            /* Se coloca DETRÁS de todo */
             pointer-events: none;
             overflow: hidden;
         }
 
-        .code-overlay {
-            position: absolute;
-            inset: 0;
-            background-image: radial-gradient(rgba(75, 43, 238, 0.05) 1px, transparent 1px);
-            background-size: 20px 20px;
-            opacity: 0.6;
-        }
-
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.5;
-        }
-
+        /* Animación de flotación suave */
         @keyframes float {
 
             0%,
@@ -123,6 +119,15 @@
             50% {
                 transform: translate(-20px, 30px);
             }
+        }
+
+        /* Definición de las manchas de color (blobs) */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            /* Desenfoque fuerte para efecto difuminado */
+            opacity: 0.5;
         }
 
         .blob-1 {
@@ -152,10 +157,14 @@
             opacity: 0.4;
         }
 
-        /* --- Glassmorphism --- */
+        /*
+           EFECTO GLASSMORPHISM (Cristal)
+           Crea una apariencia de vidrio esmerilado translúcido.
+        */
         .glass-card {
             background: rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(12px);
+            /* El desenfoque detrás del cristal */
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.5);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
@@ -167,7 +176,7 @@
             backdrop-filter: blur(4px);
         }
 
-        /* --- Buttons --- */
+        /* Estilos de Botones */
         .btn-custom-primary {
             background-color: var(--primary-color);
             color: white;
@@ -204,24 +213,12 @@
             background-color: #fff;
             color: #000;
         }
-
-        /* --- Nav --- */
-        .nav-link-custom {
-            font-weight: 600;
-            color: #4b5563;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .nav-link-custom:hover {
-            color: var(--primary-color);
-        }
     </style>
 </head>
 
 <body>
 
-    <!-- Background Blobs -->
+    <!-- Fondo de Manchas Difuminadas (Blobs) -->
     <div class="blob-bg">
         <div class="code-overlay"></div>
         <div class="blob blob-1"></div>
@@ -229,39 +226,24 @@
         <div class="blob blob-3"></div>
     </div>
 
-    <!-- Navigation -->
+    <!-- Barra de Navegación Simple -->
     <nav class="navbar fixed-top p-4" style="max-width: 1280px; margin: 0 auto;">
         <div class="container-fluid d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center gap-2">
                 <span class="material-symbols-outlined text-primary-custom fs-2">draw</span>
                 <span class="fw-bold fs-4 text-dark tracking-tight">Portfolio de Arte</span>
             </div>
-
-            <!-- Login/Register Links (Removed as requested, but keeping container structure if needed later) -->
-            <!--
-            <div class="d-flex align-items-center gap-3">
-                @if (Route::has('login'))
-                    @auth
-                                                    <a href="{{ url('/dashboard') }}" class="nav-link-custom">Panel</a>
-@else
-    <a href="{{ route('login') }}" class="nav-link-custom">Iniciar Sesión</a>
-                                                    @if (Route::has('register'))
-    <a href="{{ route('register') }}" class="d-none d-sm-inline-block btn btn-sm bg-primary-custom text-white fw-bold rounded px-3 py-2 shadow-sm text-decoration-none">Registrarse</a>
-    @endif
-                    @endauth
-                @endif
-            </div>
-            -->
+            {{-- Enlaces de navegación eliminados por simplicidad visual, se usan los botones centrales --}}
         </div>
     </nav>
 
-    <!-- Main Content -->
+    <!-- Contenido Principal -->
     <main class="flex-grow-1 d-flex align-items-center justify-content-center p-4 position-relative z-1"
         style="margin-top: 80px;">
         <div class="container" style="max-width: 1024px;">
             <div class="row align-items-center gy-5">
 
-                <!-- Left Column: Text -->
+                <!-- COLUMNA IZQUIERDA: Texto y Llamada a la Acción -->
                 <div class="col-md-6 text-center text-md-start">
                     <div
                         class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill glass-pill shadow-sm mb-4">
@@ -280,12 +262,20 @@
                         creativos y artistas digitales.
                     </p>
 
+                    <!-- Botones de Acción Condicionales -->
                     <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-md-start">
+                        {{-- 
+                            @auth: Se ejecuta si el usuario YA inició sesión.
+                        --}}
                         @auth
                             <a href="{{ url('/dashboard') }}" class="btn-custom-primary group">
                                 <span>Ir al Estudio</span>
                                 <span class="material-symbols-outlined">arrow_forward</span>
                             </a>
+                            {{-- 
+                            @else: Se ejecuta si es un visitante (Invitado).
+                            Muestra botones para Registrarse o Iniciar Sesión.
+                        --}}
                         @else
                             <a href="{{ route('register') }}" class="btn-custom-primary group">
                                 <span>Registrarse</span>
@@ -298,15 +288,15 @@
                     </div>
                 </div>
 
-                <!-- Right Column: Code Card -->
+                <!-- COLUMNA DERECHA: Tarjeta Decorativa de Código (Solo visible en escritorio d-md-block) -->
                 <div class="col-md-6 d-none d-md-block">
                     <div class="position-relative">
-                        <!-- Blur behind card for extra pop -->
+                        <!-- Efecto de resplandor detrás de la tarjeta -->
                         <div class="position-absolute w-100 h-100 rounded-4 bg-gradient-to-r from-mint via-lavender to-soft-pink opacity-50 blur"
                             style="filter: blur(40px); transform: scale(0.9);"></div>
 
                         <div class="glass-card p-4 rounded-4 position-relative">
-                            <!-- Mac Window Controls -->
+                            <!-- Controles de ventana tipo Mac (Rojo/Amarillo/Verde) -->
                             <div class="d-flex gap-2 mb-4 border-bottom border-light pb-3">
                                 <span class="rounded-circle bg-danger" style="width:12px; height:12px;"></span>
                                 <span class="rounded-circle bg-warning" style="width:12px; height:12px;"></span>
@@ -315,7 +305,7 @@
                                     class="ms-auto small font-mono text-secondary opacity-50">ArtworkController.php</span>
                             </div>
 
-                            <!-- Code -->
+                            <!-- Fragmento de Código Simulado (Decorativo) -->
                             <div class="font-mono small mb-4" style="line-height: 1.6;">
                                 <div class="d-flex">
                                     <span class="text-secondary opacity-50 me-3 user-select-none">1</span>
@@ -348,7 +338,7 @@
                                 </div>
                             </div>
 
-                            <!-- Footer of Card -->
+                            <!-- Footer de la tarjeta con badge de versión -->
                             <div class="border-top border-light pt-3 d-flex justify-content-between align-items-center">
                                 <div class="small text-secondary d-flex align-items-center gap-1">
                                     <span class="material-symbols-outlined fs-6 text-success">check_circle</span>

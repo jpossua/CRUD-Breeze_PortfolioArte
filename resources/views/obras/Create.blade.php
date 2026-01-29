@@ -5,7 +5,7 @@
     Propósito:
     - Mostrar el formulario para registrar una nueva obra en el sistema.
     - Capturar todos los datos requeridos (Nombre, Descripción, etc.).
-    - Validar errores de entrada visualmente.
+    - Validar errores de entrada visualmente y enviar a 'obras.store' (POST).
     
     Estilos:
     - Utiliza 'layouts.bootstrap'.
@@ -14,13 +14,13 @@
 @extends('layouts.bootstrap')
 
 @section('title', 'Mi Portafolio de Arte | Nueva Obra')
-
 @section('main-style', 'display: flex; align-items: center; justify-content: center;')
 
 @section('content')
     <div class="container" style="max-width: 900px;">
 
         <div class="glass-card rounded-4 p-5 shadow-lg">
+            {{-- Encabezado con título y botón para cancelar/volver --}}
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="h3 fw-bold text-dark mb-0">Nueva Obra</h1>
                 <a href="{{ route('obras.index') }}"
@@ -30,25 +30,41 @@
                 </a>
             </div>
 
+            {{-- 
+                INICIO DEL FORMULARIO
+                =====================
+                action: A dónde se envían los datos (ruta 'obras.store').
+                method: Método HTTP (POST para crear).
+            --}}
             <form action="{{ route('obras.store') }}" method="POST">
+
+                {{-- 
+                    @csrf: Directiva de Seguridad Obligatoria.
+                    Genera un token oculto para proteger contra ataques CSRF (Cross-Site Request Forgery).
+                    Sin esto, Laravel rechazará el formulario por seguridad.
+                --}}
                 @csrf
 
                 <div class="row g-4">
-                    <!-- Nombre -->
+                    <!--
+                                    CAMPO: NOMBRE DE LA OBRA
+                                    Usa value="{{ old('nombre_obra') }}" para que si hay un error al guardar,
+                                     no se borre lo que el usuario ya escribió.
+                                -->
                     <div class="col-12">
-                        <label for="nombre_obra" class="form-label fw-bold text-secondary small">NOMBRE DE LA OBRA
-                            *</label>
+                        <label for="nombre_obra" class="form-label fw-bold text-secondary small">NOMBRE DE LA OBRA *</label>
                         <input type="text" name="nombre_obra" id="nombre_obra" value="{{ old('nombre_obra') }}" required
                             class="form-control form-control-glass w-100" placeholder="Título de tu creación">
+
+                        {{-- Muestra el error de validación si existe para este campo específico --}}
                         @error('nombre_obra')
                             <span class="text-danger small">{{ $message }}</span>
                         @enderror
                     </div>
 
-                    <!-- Descripción -->
+                    <!-- CAMPO: DESCRIPCIÓN (Textarea para textos largos) -->
                     <div class="col-12">
-                        <label for="descripcion" class="form-label fw-bold text-secondary small">DESCRIPCIÓN
-                            *</label>
+                        <label for="descripcion" class="form-label fw-bold text-secondary small">DESCRIPCIÓN *</label>
                         <textarea name="descripcion" id="descripcion" rows="4" required class="form-control form-control-glass w-100"
                             placeholder="Cuenta la historia detrás de esta obra...">{{ old('descripcion') }}</textarea>
                         @error('descripcion')
@@ -56,7 +72,7 @@
                         @enderror
                     </div>
 
-                    <!-- Técnica y Dimensiones -->
+                    <!-- GRUPO: TÉCNICA Y DIMENSIONES (Dos columnas col-md-6) -->
                     <div class="col-md-6">
                         <label for="tecnica" class="form-label fw-bold text-secondary small">TÉCNICA *</label>
                         <input type="text" name="tecnica" id="tecnica" value="{{ old('tecnica') }}" required
@@ -66,8 +82,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="dimensiones" class="form-label fw-bold text-secondary small">DIMENSIONES
-                            *</label>
+                        <label for="dimensiones" class="form-label fw-bold text-secondary small">DIMENSIONES *</label>
                         <input type="text" name="dimensiones" id="dimensiones" value="{{ old('dimensiones') }}" required
                             class="form-control form-control-glass w-100" placeholder="Ej: 1920x1080px, 50x70cm">
                         @error('dimensiones')
@@ -75,10 +90,11 @@
                         @enderror
                     </div>
 
-                    <!-- Fecha y Categoría -->
+                    <!-- GRUPO: FECHA Y CATEGORÍA -->
                     <div class="col-md-6">
-                        <label for="fecha_creacion" class="form-label fw-bold text-secondary small">FECHA DE
-                            CREACIÓN *</label>
+                        {{-- Input type="date" muestra un selector de calendario nativo --}}
+                        <label for="fecha_creacion" class="form-label fw-bold text-secondary small">FECHA DE CREACIÓN
+                            *</label>
                         <input type="date" name="fecha_creacion" id="fecha_creacion" value="{{ old('fecha_creacion') }}"
                             required class="form-control form-control-glass w-100">
                         @error('fecha_creacion')
@@ -94,10 +110,13 @@
                         @enderror
                     </div>
 
-                    <!-- Imagen URL -->
+                    <!--
+                                    CAMPO: URL DE LA IMAGEN
+                                    Aquí es donde el usuario pega el enlace externo.
+                                    No hay subida de archivos, solo texto type="url".
+                                -->
                     <div class="col-12">
-                        <label for="imagen_url" class="form-label fw-bold text-secondary small">URL DE LA IMAGEN
-                            *</label>
+                        <label for="imagen_url" class="form-label fw-bold text-secondary small">URL DE LA IMAGEN *</label>
                         <div class="input-group">
                             <span
                                 class="input-group-text bg-white border-0 opacity-75 material-symbols-outlined">link</span>
@@ -109,7 +128,7 @@
                         @enderror
                     </div>
 
-                    <!-- Herramientas -->
+                    <!-- CAMPO: HERRAMIENTAS -->
                     <div class="col-12">
                         <label for="herramientas_usadas" class="form-label fw-bold text-secondary small">HERRAMIENTAS USADAS
                             *</label>
@@ -121,7 +140,11 @@
                         @enderror
                     </div>
 
-                    <!-- Visible -->
+                    <!--
+                                    CHECKBOX: VISIBILIDAD
+                                    Truco HTML: Los checkbox no marcados no se envían.
+                                    Ponemos un hidden con valor "0" antes para enviar siempre un valor (0 o 1).
+                                -->
                     <div class="col-12">
                         <div class="form-check form-switch">
                             <input type="hidden" name="visible" value="0">
@@ -132,7 +155,7 @@
                         </div>
                     </div>
 
-                    <!-- Submit -->
+                    <!-- BOTONES DE ACCIÓN -->
                     <div class="col-12 mt-4 d-flex justify-content-end gap-2">
                         <a href="{{ route('obras.index') }}"
                             class="btn btn-light text-secondary fw-bold px-4 rounded-pill">Cancelar</a>
