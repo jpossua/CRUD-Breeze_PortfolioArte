@@ -47,10 +47,10 @@
 
                 <div class="row g-4">
                     <!--
-                                    CAMPO: NOMBRE DE LA OBRA
-                                    Usa value="{{ old('nombre_obra') }}" para que si hay un error al guardar,
-                                     no se borre lo que el usuario ya escribió.
-                                -->
+                                                    CAMPO: NOMBRE DE LA OBRA
+                                                    Usa value="{{ old('nombre_obra') }}" para que si hay un error al guardar,
+                                                     no se borre lo que el usuario ya escribió.
+                                                -->
                     <div class="col-12">
                         <label for="nombre_obra" class="form-label fw-bold text-secondary small">NOMBRE DE LA OBRA *</label>
                         <input type="text" name="nombre_obra" id="nombre_obra" value="{{ old('nombre_obra') }}" required
@@ -111,10 +111,10 @@
                     </div>
 
                     <!--
-                                    CAMPO: URL DE LA IMAGEN
-                                    Aquí es donde el usuario pega el enlace externo.
-                                    No hay subida de archivos, solo texto type="url".
-                                -->
+                                                    CAMPO: URL DE LA IMAGEN
+                                                    Aquí es donde el usuario pega el enlace externo.
+                                                    No hay subida de archivos, solo texto type="url".
+                                                -->
                     <div class="col-12">
                         <label for="imagen_url" class="form-label fw-bold text-secondary small">URL DE LA IMAGEN *</label>
                         <div class="input-group">
@@ -141,10 +141,10 @@
                     </div>
 
                     <!--
-                                    CHECKBOX: VISIBILIDAD
-                                    Truco HTML: Los checkbox no marcados no se envían.
-                                    Ponemos un hidden con valor "0" antes para enviar siempre un valor (0 o 1).
-                                -->
+                                                    CHECKBOX: VISIBILIDAD
+                                                    Truco HTML: Los checkbox no marcados no se envían.
+                                                    Ponemos un hidden con valor "0" antes para enviar siempre un valor (0 o 1).
+                                                -->
                     <div class="col-12">
                         <div class="form-check form-switch">
                             <input type="hidden" name="visible" value="0">
@@ -158,8 +158,9 @@
                     <!-- BOTONES DE ACCIÓN -->
                     <div class="col-12 mt-4 d-flex justify-content-end gap-2">
                         <a href="{{ route('obras.index') }}"
-                            class="btn btn-light text-secondary fw-bold px-4 rounded-pill">Cancelar</a>
-                        <button type="submit"
+                            class="btn btn-light text-secondary fw-bold px-4 rounded-pill"
+                            onmouseover="new Audio('/sounds/bubble-pop-283674.mp3').play()">Cancelar</a>
+                        <button type="submit" onmouseover="new Audio('/sounds/bubble-pop-283674.mp3').play()"
                             class="btn btn-primary bg-primary-custom border-0 fw-bold px-4 rounded-pill shadow-sm d-flex align-items-center gap-2">
                             <span class="material-symbols-outlined fs-5">save</span>
                             Guardar Obra

@@ -1,3 +1,21 @@
+{{--
+    ==========================================================================
+    LAYOUT: BOOTSTRAP (Maestro)
+    ==========================================================================
+    Propósito:
+    - Estructura base HTML5 para todas las vistas autenticadas.
+    - Carga de dependencias globales: CSS (Bootstrap, Google Fonts), JS (Alpine.js).
+    - Definición de variables CSS globales (:root).
+    
+    Secciones (@yield):
+    - title: Título de la pestaña del navegador.
+    - main-style: Estilos inline específicos para la etiqueta <main>.
+    - content: El contenido principal de la vista hija.
+    
+    Pilas (@stack):
+    - styles: CSS adicional específico de una vista.
+    - scripts: JS adicional específico de una vista.
+--}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -15,6 +33,9 @@
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
+
+    <!-- Alpine.js (Necesario para los sonidos x-init) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
 
     <style>
         :root {

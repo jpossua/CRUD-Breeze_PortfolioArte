@@ -1,3 +1,15 @@
+{{--
+    ==========================================================================
+    VISTA: RESTABLECER CONTRASEÑA
+    ==========================================================================
+    Propósito:
+    - Formulario final para definir una nueva contraseña tras solicitar el reset.
+    - Token de verificación incluido.
+    
+    Estilos:
+    - Minimalista con fondo animado (Blobs).
+    - Tarjeta 'Glassmorphism' central.
+--}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -11,6 +23,8 @@
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet">
+    <!-- Alpine.js (Necesario para sonidos) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
     <style>
         :root {
             --primary-color: #4b2bee;
@@ -128,10 +142,10 @@
 
         <form method="POST" action="{{ route('password.store') }}">
             @csrf
-            <!-- Password Reset Token -->
+            <!-- Token de Restablecimiento de Contraseña -->
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-            <!-- Email -->
+            <!-- Correo Electrónico -->
             <div class="mb-3">
                 <label for="email" class="form-label fw-bold text-secondary small">CORREO ELECTRÓNICO</label>
                 <input type="email" name="email" id="email" value="{{ old('email', $request->email) }}" required
@@ -141,7 +155,7 @@
                 @enderror
             </div>
 
-            <!-- Password -->
+            <!-- Contraseña -->
             <div class="mb-3">
                 <label for="password" class="form-label fw-bold text-secondary small">NUEVA CONTRASEÑA</label>
                 <input type="password" name="password" id="password" required autocomplete="new-password"
@@ -151,7 +165,7 @@
                 @enderror
             </div>
 
-            <!-- Confirm Password -->
+            <!-- Confirmar Contraseña -->
             <div class="mb-4">
                 <label for="password_confirmation" class="form-label fw-bold text-secondary small">CONFIRMAR
                     CONTRASEÑA</label>
@@ -162,7 +176,9 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-primary-custom w-100 mb-2 shadow-sm">
+            {{-- Sonido al pasar el ratón para feedback interactivo --}}
+            <button type="submit" onmouseover="new Audio('/sounds/bubble-pop-283674.mp3').play()"
+                class="btn btn-primary-custom w-100 mb-2 shadow-sm">
                 Restablecer y Entrar
             </button>
         </form>

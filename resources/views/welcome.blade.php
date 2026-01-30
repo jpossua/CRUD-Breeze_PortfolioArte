@@ -277,11 +277,14 @@
                             Muestra botones para Registrarse o Iniciar Sesión.
                         --}}
                         @else
-                            <a href="{{ route('register') }}" class="btn-custom-primary group">
+                            <a href="{{ route('register') }}"
+                                onmouseover="new Audio('/sounds/bubble-pop-283674.mp3').play()"
+                                class="btn-custom-primary group">
                                 <span>Registrarse</span>
                                 <span class="material-symbols-outlined">person_add</span>
                             </a>
-                            <a href="{{ route('login') }}" class="btn-custom-outline">
+                            <a href="{{ route('login') }}" onmouseover="new Audio('/sounds/bubble-pop-283674.mp3').play()"
+                                class="btn-custom-outline">
                                 Iniciar Sesión
                             </a>
                         @endauth

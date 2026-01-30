@@ -112,7 +112,8 @@
                     <div class="mt-auto d-flex gap-2">
                         {{-- Enlace a la vista de Edición --}}
                         <a href="{{ route('obras.edit', $obra) }}"
-                            class="btn btn-warning text-white fw-bold px-4 rounded-pill shadow-sm d-flex align-items-center gap-2 flex-grow-1 justify-content-center">
+                            class="btn btn-warning text-white fw-bold px-4 rounded-pill shadow-sm d-flex align-items-center gap-2 flex-grow-1 justify-content-center"
+                            onmouseover="new Audio('/sounds/bubble-pop-283674.mp3').play()">
                             <span class="material-symbols-outlined fs-5">edit</span>
                             Editar Obra
                         </a>
@@ -124,7 +125,8 @@
                             {{-- Botón que abre el modal de confirmación --}}
                             <button type="button"
                                 class="btn btn-outline-danger fw-bold px-3 rounded-pill d-flex align-items-center gap-2"
-                                data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $obra->id }}">
+                                onmouseover="new Audio('/sounds/bubble-pop-283674.mp3').play()" data-bs-toggle="modal"
+                                data-bs-target="#deleteModal-{{ $obra->id }}">
                                 <span class="material-symbols-outlined fs-5">delete</span>
                                 Eliminar Obra
                             </button>
@@ -153,11 +155,14 @@
                     <p class="small mb-0 text-danger">Esta acción no se puede deshacer.</p>
                 </div>
                 <div class="modal-footer border-0 justify-content-center gap-2">
-                    <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-light rounded-pill px-4"
+                        onmouseover="new Audio('/sounds/bubble-pop-283674.mp3').play()"
+                        data-bs-dismiss="modal">Cancelar</button>
                     <form action="{{ route('obras.destroy', $obra) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger rounded-pill px-4 fw-bold">Sí,
+                        <button type="submit" class="btn btn-danger rounded-pill px-4 fw-bold"
+                            onmouseover="new Audio('/sounds/bubble-pop-283674.mp3').play()">Sí,
                             eliminar</button>
                     </form>
                 </div>

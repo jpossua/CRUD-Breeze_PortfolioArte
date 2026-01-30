@@ -47,12 +47,12 @@
 
                 <div class="row g-4">
                     <!--
-                                    PRE-LLENADO DE DATOS (Model Binding)
-                                    ====================================
-                                    Usamos old('campo', $valor_por_defecto).
-                                    1. old('nombre_obra'): Busca si hubo un intento fallido previo (input del usuario).
-                                    2. $obra->nombre_obra: Si no hay input previo, usa el valor guardado en BBDD.
-                                -->
+                                                        PRE-LLENADO DE DATOS (Model Binding)
+                                                        ====================================
+                                                        Usamos old('campo', $valor_por_defecto).
+                                                        1. old('nombre_obra'): Busca si hubo un intento fallido previo (input del usuario).
+                                                        2. $obra->nombre_obra: Si no hay input previo, usa el valor guardado en BBDD.
+                                                    -->
                     <div class="col-12">
                         <label for="nombre_obra" class="form-label fw-bold text-secondary small">NOMBRE DE LA OBRA *</label>
                         <input type="text" name="nombre_obra" id="nombre_obra"
@@ -153,9 +153,9 @@
 
                     <!-- Submit (Botón Actualizar) -->
                     <div class="col-12 mt-4 d-flex justify-content-end gap-2">
-                        <a href="{{ route('obras.index') }}"
-                            class="btn btn-light text-secondary fw-bold px-4 rounded-pill">Cancelar</a>
-                        <button type="submit"
+                        <a href="{{ route('obras.index') }}" class="btn btn-light text-secondary fw-bold px-4 rounded-pill"
+                            onmouseover="new Audio('/sounds/bubble-pop-283674.mp3').play()">Cancelar</a>
+                        <button type="submit" onmouseover="new Audio('/sounds/bubble-pop-283674.mp3').play()"
                             class="btn btn-warning text-white fw-bold px-4 rounded-pill shadow-sm d-flex align-items-center gap-2">
                             <span class="material-symbols-outlined fs-5">update</span>
                             Actualizar Obra

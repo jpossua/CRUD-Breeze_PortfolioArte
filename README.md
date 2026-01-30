@@ -178,6 +178,13 @@ protected $fillable = [
 ];
 ```
 
+### 6. Experiencia Interactiva (UX)
+Se ha implementado un sistema de retroalimentación auditiva para mejorar la inmersión del usuario:
+
+*   **Feedback Auditivo:** Efectos de sonido sutiles (`bubble-pop`) al pasar el cursor sobre botones y enlaces importantes.
+*   **Bienvenida Personalizada:** Sonido de inicio de sesión que se reproduce **una única vez** tras autenticarse correctamente, gestionado mediante *Flash Sessions*.
+*   **Tecnología Híbrida:** Uso inteligente de **Alpine.js** (`@click`) y eventos nativos (`onmousedown`) para garantizar la reproducción sin latencia en navegaciones rápidas.
+
 ---
 
 ## Instalación y Despliegue

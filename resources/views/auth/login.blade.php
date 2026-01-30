@@ -1,3 +1,15 @@
+{{--
+    ==========================================================================
+    VISTA: LOGIN (Inicio de Sesión)
+    ==========================================================================
+    Propósito:
+    - Formulario de autenticación para usuarios registrados.
+    - Acceso al 'Estudio' (Dashboard).
+    
+    Estilos:
+    - Diseño a dos columnas: Ilustración artística (izquierda) y Formulario (derecha).
+    - Uso de Alpine.js para efectos de sonido interactivos.
+--}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -14,6 +26,9 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet">
+
+    <!-- Alpine.js (Necesario para los efectos de sonido en botones y eventos) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
 
     <style>
         /* --- Custom Theme Variables --- */
@@ -285,7 +300,12 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-primary-custom w-100 mb-4 shadow">
+                        {{-- 
+                            Sonido al pasar el mouse (onmouseover): 
+                            Crea una experiencia interactiva antes de hacer clic.
+                        --}}
+                        <button type="submit" onmouseover="new Audio('/sounds/bubble-pop-283674.mp3').play()"
+                            class="btn btn-primary-custom w-100 mb-4 shadow">
                             Iniciar Sesión
                             <span class="material-symbols-outlined fs-5">arrow_forward</span>
                         </button>

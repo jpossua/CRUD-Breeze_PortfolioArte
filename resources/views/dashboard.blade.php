@@ -32,7 +32,9 @@
                 style="width: 8px; height: 8px; animation: pulse 2s infinite;"></span>
             <span class="small font-mono text-secondary">Estudio Activo</span>
         </div>
-
+        @if (session('login_success'))
+            <div x-data x-init="new Audio('/sounds/interface-welcome-131917.mp3').play()"></div>
+        @endif
         <h1 class="display-4 fw-black text-dark mb-3">
             Bienvenido al <span class="text-gradient">Estudio</span>
         </h1>
@@ -106,9 +108,9 @@
 @push('styles')
     <style>
         /*
-                           Estilos locales encapsulados solo para el Dashboard.
-                           Define cómo se ven y reaccionan las tarjetas de acción.
-                        */
+                                               Estilos locales encapsulados solo para el Dashboard.
+                                               Define cómo se ven y reaccionan las tarjetas de acción.
+                                            */
         .action-card {
             background: rgba(255, 255, 255, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.7);

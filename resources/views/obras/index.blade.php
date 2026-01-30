@@ -44,7 +44,8 @@
                 Genera automáticamente la URL para crear una obra (ej: /obras/create).
                 Es mejor usar nombres de ruta que URLs fijas.
             --}}
-            <a href="{{ route('obras.create') }}" class="btn-custom-primary">
+            <a href="{{ route('obras.create') }}" onmouseover="new Audio('/sounds/bubble-pop-283674.mp3').play()"
+                class="btn-custom-primary">
                 <span class="material-symbols-outlined">add</span>
                 Nueva Obra
             </a>
@@ -184,11 +185,13 @@
                         </div>
                         <div class="modal-footer border-0 justify-content-center gap-2">
                             <button type="button" class="btn btn-light rounded-pill px-4"
+                                onmouseover="new Audio('/sounds/bubble-pop-283674.mp3').play()"
                                 data-bs-dismiss="modal">Cancelar</button>
                             <form action="{{ route('obras.destroy', $obra) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger rounded-pill px-4 fw-bold">Sí,
+                                <button type="submit" class="btn btn-danger rounded-pill px-4 fw-bold"
+                                    onmouseover="new Audio('/sounds/bubble-pop-283674.mp3').play()">Sí,
                                     eliminar</button>
                             </form>
                         </div>

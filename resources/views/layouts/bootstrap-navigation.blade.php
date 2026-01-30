@@ -1,3 +1,16 @@
+{{--
+    ==========================================================================
+    COMPONENTE: NAVGATION (Barra de Navegación)
+    ==========================================================================
+    Propósito:
+    - Menú superior fijo para usuarios autenticados.
+    - Navegación entre Dashboard y Portfolio.
+    - Menú desplegable de perfil de usuario.
+    
+    Estilos:
+    - Efecto 'Glassmorphism' (cristal) flotante.
+    - Adaptable a móvil (Responsive) con menú hamburguesa.
+--}}
 <nav class="navbar navbar-expand-sm fixed-top glass-pill m-3 rounded-4 shadow-sm"
     style="max-width: 1280px; margin: 1rem auto !important;">
     <div class="container-fluid">

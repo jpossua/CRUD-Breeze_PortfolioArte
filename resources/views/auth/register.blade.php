@@ -1,3 +1,15 @@
+{{--
+    ==========================================================================
+    VISTA: REGISTER (Registro)
+    ==========================================================================
+    Propósito:
+    - Formulario de creación de nueva cuenta.
+    - Incorpora al usuario a la comunidad 'Colectivo'.
+    
+    Estilos:
+    - Mantiene la coherencia visual con Login (Ilustración + Formulario).
+    - Incluye efectos de sonido mediante Alpine.js/JS nativo.
+--}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -14,6 +26,10 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet">
+
+    <!-- Alpine.js (Necesario para los efectos de sonido en botones y eventos) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+
 
     <style>
         /* --- Custom Theme Variables --- */
@@ -227,7 +243,7 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
-                        <!-- Name -->
+                        <!-- Nombre -->
                         <div class="mb-3">
                             <label for="name" class="form-label small fw-medium text-dark">Nombre Completo</label>
                             <div class="input-wrapper">
@@ -242,7 +258,7 @@
                             @enderror
                         </div>
 
-                        <!-- Email -->
+                        <!-- Correo Electrónico -->
                         <div class="mb-3">
                             <label for="email" class="form-label small fw-medium text-dark">Correo
                                 Electrónico</label>
@@ -258,7 +274,7 @@
                             @enderror
                         </div>
 
-                        <!-- Password -->
+                        <!-- Contraseña -->
                         <div class="mb-3">
                             <label for="password" class="form-label small fw-medium text-dark">Contraseña</label>
                             <div class="input-wrapper">
@@ -273,7 +289,7 @@
                             @enderror
                         </div>
 
-                        <!-- Confirm Password -->
+                        <!-- Confirmar Contraseña -->
                         <div class="mb-4">
                             <label for="password_confirmation" class="form-label small fw-medium text-dark">Confirmar
                                 Contraseña</label>
@@ -289,7 +305,12 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-primary-custom w-100 mb-4 shadow">
+                        {{-- 
+                            Sonido al pasar el mouse (onmouseover): 
+                            Feedback auditivo inmediato al interactuar con el botón de acción principal.
+                        --}}
+                        <button type="submit" onmouseover="new Audio('/sounds/bubble-pop-283674.mp3').play()"
+                            class="btn btn-primary-custom w-100 mb-4 shadow">
                             Registrarse
                             <span class="material-symbols-outlined fs-5">arrow_forward</span>
                         </button>
