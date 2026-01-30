@@ -61,9 +61,9 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <form method="POST" action="{{ route('logout') }}">
+                            <form method="POST" id="logout-form" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="dropdown-item py-2 px-3 text-danger fw-bold">Cerrar
+                                <button type="button" class="dropdown-item py-2 px-3 text-danger fw-bold" onclick="playLogoutSound()">Cerrar
                                     Sesión</button>
                             </form>
                         </li>
@@ -73,3 +73,27 @@
         </div>
     </div>
 </nav>
+
+<script>
+    function playLogoutSound() {
+        // 1. Crear el objeto de audio
+        let audio = new Audio('/sounds/logout-transBurbujaBobEsponja.mp3'); // Asegúrate que la ruta coincida con tu archivo
+        
+        // 2. Reproducir sonido
+        audio.play().catch(error => {
+            // Si falla el audio (bloqueo de navegador), cerramos sesión igual
+            console.log("No se pudo reproducir audio:", error);
+            document.getElementById('logout-form').submit();
+        });
+
+        // 3. Cuando termine el sonido, enviar el formulario
+        audio.onended = function() {
+            document.getElementById('logout-form').submit();
+        };
+
+        // Opción de seguridad: Si el audio es muy largo o falla el onended, forzar salida en 1.5 seg
+        setTimeout(() => {
+            document.getElementById('logout-form').submit();
+        }, 1500); 
+    }
+</script>
