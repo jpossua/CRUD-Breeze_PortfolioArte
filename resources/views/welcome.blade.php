@@ -365,6 +365,64 @@
 
     <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+      <!-- 1. EL AVISO (Toast) -->
+    <div id="sound-toast" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1050; display: none;">
+        <div class="toast show align-items-center text-bg-dark border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body d-flex align-items-center gap-2">
+                    <span class="material-symbols-outlined text-warning">volume_up</span>
+                    <span>Haga clic en la pantalla para activar el audio.</span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. LA LÓGICA -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var toast = document.getElementById('sound-toast');
+            
+            // Usamos SOLO el sonido Pop para probar
+            var checkSound = new Audio("{{ asset('sounds/bubble-pop-283674.mp3') }}");
+            checkSound.volume = 0.0; // ¡TRUCO! Lo ponemos en VOLUMEN 0 (Mudo) para probar si nos dejan
+
+            var isUnlocked = false;
+
+            function checkAutoplay() {
+                // Intentamos reproducir el sonido mudo
+                checkSound.play().then(() => {
+                    // ÉXITO: El navegador permite audio. No mostramos aviso.
+                    console.log("Audio permitido (Silencioso).");
+                    isUnlocked = true;
+                    toast.style.display = 'none';
+                }).catch(() => {
+                    // BLOQUEADO: Mostramos el aviso
+                    console.log("Audio bloqueado. Mostrando aviso.");
+                    toast.style.display = 'block';
+                });
+            }
+
+            // Probamos al cargar
+            checkAutoplay();
+
+            // Si hacen clic en el aviso (o en cualquier sitio), desbloqueamos
+            document.addEventListener('click', function() {
+                if (!isUnlocked) {
+                    isUnlocked = true;
+                    toast.style.display = 'none';
+                }
+            }, { once: true }); // Solo hace falta la primera vez
+
+            // Configuración de botones
+            document.querySelectorAll('.btn-custom-primary, .btn-custom-outline').forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                   popSound.cloneNode().play().catch(() => {});
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
